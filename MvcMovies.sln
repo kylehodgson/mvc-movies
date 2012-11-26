@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovies", "MvcMovies\MvcMovies.csproj", "{71C6F39B-BB11-4146-A4F0-04745BD15741}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovies", "MvcMovies\MvcMovies\MvcMovies.csproj", "{71C6F39B-BB11-4146-A4F0-04745BD15741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovies.Tests", "MvcMovies.Tests\MvcMovies.Tests.csproj", "{B4A52115-E0D1-4A58-90E7-5A309EF13216}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovies.Tests", "MvcMovies\MvcMovies.Tests\MvcMovies.Tests.csproj", "{B4A52115-E0D1-4A58-90E7-5A309EF13216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
