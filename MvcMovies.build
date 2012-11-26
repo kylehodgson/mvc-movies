@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectName>$(MSBuildProjectName)</ProjectName>
+    <Solution Condition="Exists('$(ProjectName).sln')">$(ProjectName).sln</Solution>
+    <UnitTestProject Condition="Exists('$(ProjectName)Tests')">$(ProjectName)Tests</UnitTestProject>
+    <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
+    <Env Condition="$(Env) == ''">test</Env>
+    <MSBuildCommunityTasksPath Condition="$(MSBuildCommunityTasksPath) == ''">$(MSBuildProjectDirectory)\Dependencies\msbuild-community-tasks</MSBuildCommunityTasksPath>
+    <ArtifactDirectory>$(MSBuildProjectDirectory)\artifact</ArtifactDirectory>
+    <ArtifactName>SalsaImporter.zip</ArtifactName>
+    <ArtifactPath>$(ArtifactDirectory)\$(ArtifactName)</ArtifactPath>
+    <PackageDirectory>$(MSBuildProjectDirectory)\package</PackageDirectory>
+  </PropertyGroup>
+  
+  <Target Name="Build" DependsOnTargets="Compile"/>
+
+  <Target Name="Clean">
+    <ItemGroup>
+      <VisualStudioFiles Include="$(MSBuildProjectDirectory)\**\bin\$(Configuration)\**\*" />
+      <VisualStudioFiles Include="$(MSBuildProjectDirectory)\**\obj\$(Configuration)\**\*" />
+    </ItemGroup>
+    <Delete Files="@(VisualStudioFiles)" />
+  </Target>
+  
+  <Target Name="Compile">
+    <Error Text="No Solution property was defined" Condition="$(Solution) == ''" />
+    <MSBuild Projects="$(Solution)" Targets="Rebuild" Properties="Configuration=$(Configuration)" />
+  </Target>
+  
+  <!--<Target Name="UnitTest" DependsOnTargets="Compile">
+    <Error Text="Missing or invalid value specified for the NUnitDirectory property"
+      Condition="$(UnitTestProject) != '' And !Exists('$(NUnitDirectory)')" />
+   
+    <Exec Command="$(NUnitDirectory)\nunit-console-x86.exe $(UnitTestProject).dll /exclude:PerformanceTest,FunctionalTest,IntegrationTest" 
+    WorkingDirectory="$(MSBuildProjectDirectory)\$(UnitTestProject)\bin\$(Configuration)"/>
+  </Target>-->
+
+  
+
+  <Target Name="Config">
+    <XmlPeek Namespaces=""
+            XmlInputPath="$(MSBuildProjectDirectory)\environments.xml"
+            Query="/environments/$(Env)/dbHost/text()">
+      <Output TaskParameter="Result" ItemName="DbHost" />
+    </XmlPeek>
+    
+    <XmlPeek Namespaces=""
+            XmlInputPath="$(MSBuildProjectDirectory)\environments.xml"
+            Query="/environments/$(Env)/dbName/text()">
+      <Output TaskParameter="Result" ItemName="DbName" />
+    </XmlPeek>
+
+    <XmlPeek Namespaces=""
+           XmlInputPath="$(MSBuildProjectDirectory)\environments.xml"
+           Query="/environments/$(Env)/dbTrustedConnection/text()">
+      <Output TaskParameter="Result" ItemName="DbTrustedConnection" />
+    </XmlPeek>
+  </Target>
+</Project>

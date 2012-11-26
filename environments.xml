@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<environments>
+  <test>
+    <dbHost>.</dbHost>
+    <dbName>MvcMovies</dbName>
+    <dbTrustedConnection>True</dbTrustedConnection>
+  </test>
+ </environments>
