@@ -9,13 +9,17 @@ namespace MvcMovies.Repositories
   {
     private MoviesContext MovieContext;
 
+    public MovieRepository()
+    {
+      
+    }
+
     public MovieRepository(MoviesContext moviesContext = null)
     {
       MovieContext = moviesContext ?? new MoviesContext();
     }
 
-
-    public IEnumerable<Movie> SearchMovies(string movieTitle)
+    public virtual IEnumerable<Movie> SearchMovies(string movieTitle)
     {
       return MovieContext.SearchMovie(movieTitle);
     }
