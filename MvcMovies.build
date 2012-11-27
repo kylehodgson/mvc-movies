@@ -11,6 +11,9 @@
     <ArtifactName>SalsaImporter.zip</ArtifactName>
     <ArtifactPath>$(ArtifactDirectory)\$(ArtifactName)</ArtifactPath>
     <PackageDirectory>$(MSBuildProjectDirectory)\package</PackageDirectory>
+    <BuildDependsOn>$(BuildDependsOn);Nuget;Nuget-Tests</BuildDependsOn>
+    <RebuildDependsOn>$(RebuildDependsOn);Nuget;Nuget-Tests</RebuildDependsOn>
+    
   </PropertyGroup>
   
   <Target Name="Build" DependsOnTargets="Compile;UnitTest"/>
@@ -41,15 +44,31 @@
       <!--TestSuccessOrNot is the property specify whether the Test is sucess or not -->
       <TestSuccessOrNot>1</TestSuccessOrNot>
     </PropertyGroup>
+ 
     <!--Run MSTest.exe  TODO: repalce the path below with an environment value!-->
-    <Exec Command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\mstest.exe&quot; /testcontainer:c:\Users\khodgson\Projects\mvc-movies\MvcMovies\MvcMovies.Tests\bin\Debug\MvcMovies.Tests.dll" >
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\mstest.exe&quot; /testcontainer:MvcMovies\MvcMovies.Tests\bin\Debug\MvcMovies.Tests.dll" >
       <Output TaskParameter="ExitCode" PropertyName="TestSuccessOrNot"/>
     </Exec>
     <!--Condition checks whether the MSTest was executed successfully, if so, deploy your web site-->
-    <MSBuild Condition ="'$(TestSuccessOrNot)'=='0'" Projects="C:\Users\khodgson\Projects\mvc-movies\MvcMovies\MvcMovies.Tests\MvcMovies.Tests.csproj"
+    <MSBuild Condition ="'$(TestSuccessOrNot)'=='0'" Projects="MvcMovies\MvcMovies.Tests\MvcMovies.Tests.csproj"
 	/>
   </Target>
+  
+  
+  <Target Name="Nuget" BeforeTargets="Compile">
+    <Message Text="Nuget for $(TargetName) starting." />
+    <Exec
+      Command=".nuget\Nuget.exe install MvcMovies\MvcMovies\packages.config -o MvcMovies\packages" />
+    <Message Text="Nuget for $(TargetName) finished." />
+  </Target>
 
+  <Target Name="Nuget-Tests" BeforeTargets="Compile">
+    <Message Text="Nuget for $(TargetName) starting." />
+    <Exec
+      Command=".nuget\Nuget.exe install MvcMovies\MvcMovies.Tests\packages.config -o MvcMovies\packages" />
+    <Message Text="Nuget for $(TargetName) finished." />
+  </Target>
+  
   <Target Name="Config">
     <XmlPeek Namespaces=""
             XmlInputPath="$(MSBuildProjectDirectory)\environments.xml"
