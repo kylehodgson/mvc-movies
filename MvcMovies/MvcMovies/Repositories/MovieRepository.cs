@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using MvcMovies.Models;
@@ -16,7 +17,7 @@ namespace MvcMovies.Repositories
 
     public IEnumerable<Movie> SearchMovies(string movieTitle)
     {
-      return new List<Movie> {new Movie {Title = movieTitle}};
+      return MovieContext.SearchMovie(movieTitle);
     }
 
     public int Count()

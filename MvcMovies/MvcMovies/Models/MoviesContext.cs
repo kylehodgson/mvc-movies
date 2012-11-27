@@ -20,5 +20,10 @@ namespace MvcMovies.Models
       Movies.Add(movie);
     }
 
+    public virtual IEnumerable<Movie> SearchMovie(string title)
+    {
+      return Movies.Where(movie => movie.Title == title);
+    }
+
   }
 }

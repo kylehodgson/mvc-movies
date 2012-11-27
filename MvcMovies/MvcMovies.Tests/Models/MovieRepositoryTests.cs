@@ -17,8 +17,15 @@ namespace MvcMovies.Tests
     public void It_Should_Be_Able_To_Search_Movies()
     {
       // arrange
+      Mock<MoviesContext> mockContext = new Mock<MoviesContext>();
+      var movie = new Movie {Title = movieTitle};
+      mockContext.Setup(context => context.SearchMovie(movieTitle)).Returns(new List<Movie> {movie});
+      var repo = new MovieRepository(mockContext.Object);
+
+      // act
+      var testMovie = new Movie { Title = movieTitle };
+      repo.AddMovie(testMovie);
       int expectedCount = 1;
-      var repo = new MovieRepository();
 
       // act
       IEnumerable<Movie> result = repo.SearchMovies(movieTitle);
@@ -54,11 +61,7 @@ namespace MvcMovies.Tests
 
       // assert
       mockContext.Verify(m => m.AddMovie(testMovie),Times.Once());
-      
-
     }
-
-
   }
 
 }
