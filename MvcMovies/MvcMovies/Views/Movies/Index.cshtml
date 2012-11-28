@@ -5,3 +5,9 @@
 }
 
 <h2>Search</h2>
+@using (Html.BeginForm())
+{
+    @Html.Label(Model.Heading)
+    @Html.TextBox("search_term")
+    <input type="submit" value="Search" />
+}
