@@ -8,7 +8,14 @@ namespace MvcMovies.Models
 {
   public class MoviesContext : DbContext
   {
-    public DbSet<Movie> Movies { get; set; }
+//    public DbSet<Movie> Movies { get; set; }
+    public List<Movie> Movies =
+      Enumerable.Range(1, 10).Select(i => new Movie
+                                            {
+                                              Title = String.Format("Halloween {0}", i)
+                                            }
+        ).ToList();
+
 
     public virtual int GetNumberOfMovies()
     {
@@ -24,6 +31,5 @@ namespace MvcMovies.Models
     {
       return Movies.Where(movie => movie.Title == title);
     }
-
   }
 }

@@ -4,4 +4,11 @@
     ViewBag.Title = "SearchResults";
 }
 
+@Html.DisplayForModel()
+
 <h2>SearchResults</h2>
+
+@foreach (var movie in Model.Movies)
+{
+    @Html.DisplayFor(m => movie.Title)
+}

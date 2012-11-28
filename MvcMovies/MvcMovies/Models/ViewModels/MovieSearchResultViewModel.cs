@@ -4,7 +4,8 @@ namespace MvcMovies.Models.ViewModels
 {
   public class MovieSearchResultViewModel
   {
-    public string Title { get; set;  }
     public IEnumerable<Movie> Movies { get; set; }
+
+    public string PageTitle { get; set;  }
   }
 }

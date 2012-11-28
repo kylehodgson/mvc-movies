@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Web.Mvc;
 using MvcMovies.Models;
 using MvcMovies.Models.ViewModels;
@@ -24,10 +25,11 @@ namespace MvcMovies.Controllers
       return View(viewModel);
     }
 
-    public ViewResult Search(string title)
+    [HttpPost]
+    public ViewResult Search(SearchRequest searchRequest)
     {
-      var movies = _movieCatalogue.SearchMovies(title);
-      var viewModel = new MovieSearchResultViewModel {Title = "Search Results", Movies = movies};
+      var movies = _movieCatalogue.SearchMovies(searchRequest.SearchTerm).ToList().Take(searchRequest.NumRows);
+      var viewModel = new MovieSearchResultViewModel {PageTitle = "Search Results", Movies = movies};
       return View(viewModel);
     }
   }

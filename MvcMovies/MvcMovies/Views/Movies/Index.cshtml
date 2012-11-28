@@ -5,9 +5,10 @@
 }
 
 <h2>Search</h2>
-@using (Html.BeginForm())
+@using (Html.BeginForm("search" , "movies"))
 {
     @Html.Label(Model.Heading)
-    @Html.TextBox("search_term")
+    @Html.TextBox("SearchTerm")
+    @Html.Hidden("NumRows",3)
     <input type="submit" value="Search" />
 }

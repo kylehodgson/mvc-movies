@@ -11,7 +11,7 @@ namespace MvcMovies.Repositories
 
     public MovieRepository()
     {
-      
+      MovieContext = new MoviesContext();
     }
 
     public MovieRepository(MoviesContext moviesContext = null)
