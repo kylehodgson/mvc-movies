@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\MoviesControllerTest.cs" />
+    <Compile Include="Models\MovieCatalogueTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Models\MovieRepositoryTests.cs" />

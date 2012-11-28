@@ -1,21 +1,21 @@
 using System.Web.Mvc;
+using MvcMovies.Models;
 using MvcMovies.Models.ViewModels;
-using MvcMovies.Repositories;
 
 namespace MvcMovies.Controllers
 {
   public class MoviesController : Controller
   {
-    private MovieRepository MovieRepository;
+    private MovieCatalogue _movieCatalogue;
 
     public MoviesController()
     {
-      MovieRepository = new MovieRepository();
+      _movieCatalogue = new MovieCatalogue();
     }
 
-    public MoviesController(MovieRepository movieRepository = null)
+    public MoviesController(MovieCatalogue movie = null)
     {
-      MovieRepository = movieRepository ?? new MovieRepository();
+      _movieCatalogue = movie ?? new MovieCatalogue();
     }
 
     public ActionResult Index()
@@ -26,7 +26,7 @@ namespace MvcMovies.Controllers
 
     public ViewResult Search(string title)
     {
-      var movies = MovieRepository.SearchMovies(title);
+      var movies = _movieCatalogue.SearchMovies(title);
       var viewModel = new MovieSearchResultViewModel {Title = "Search Results", Movies = movies};
       return View(viewModel);
     }

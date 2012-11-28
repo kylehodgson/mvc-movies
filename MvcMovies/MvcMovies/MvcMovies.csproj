@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieCatalogue.cs" />
     <Compile Include="Models\MoviesContext.cs" />
     <Compile Include="Models\ViewModels\MovieSearchResultViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
