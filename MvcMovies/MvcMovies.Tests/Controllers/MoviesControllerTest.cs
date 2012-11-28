@@ -23,7 +23,8 @@ namespace MvcMovies.Tests.Controllers
 
       //assert
       var searchViewModel = (MovieSearchViewModel) result.Model;
-      Assert.AreEqual("Search Movies", searchViewModel.Title);
+      Assert.AreEqual("Search Movies", searchViewModel.PageTitle);
+      Assert.AreEqual("Title", searchViewModel.Heading);
     }
 
     [TestMethod]

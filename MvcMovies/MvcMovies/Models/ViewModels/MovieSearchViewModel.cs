@@ -2,6 +2,8 @@
 {
   public class MovieSearchViewModel
   {
-    public string Title { get; set; }
+    public string PageTitle { get; set; }
+
+    public string Heading { get; set; }
   }
 }

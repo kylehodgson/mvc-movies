@@ -20,7 +20,7 @@ namespace MvcMovies.Controllers
 
     public ActionResult Index()
     {
-      var viewModel = new MovieSearchViewModel {Title = "Search Movies"};
+      var viewModel = new MovieSearchViewModel {PageTitle = "Search Movies", Heading = "Title"};
       return View(viewModel);
     }
 
