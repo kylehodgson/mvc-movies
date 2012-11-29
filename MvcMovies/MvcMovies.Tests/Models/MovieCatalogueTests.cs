@@ -21,9 +21,10 @@ namespace MvcMovies.Tests.Models
       movieRepo.Setup(it => it.SearchMovies(searchTerm)).Returns(new List<Movie> {movie});
 
       var movieCatalogue = new MovieCatalogue(movieRepo.Object);
-      var result = movieCatalogue.SearchMovies(searchTerm);
+      var result = movieCatalogue.SearchMovies(searchTerm).ToList();
 
       Assert.AreEqual(expectedCount, result.Count());
+      Assert.AreEqual(searchTerm, result[0].Title);
     }
   }
 }

@@ -48,6 +48,7 @@ namespace MvcMovies.Tests.Controllers
 
       //assert
       Assert.AreEqual(1, viewModel.Movies.Count());
+      Assert.AreEqual(title, viewModel.Movies.ToList()[0].Title);
       Assert.AreEqual("Search Results", viewModel.PageTitle);
     }
 
