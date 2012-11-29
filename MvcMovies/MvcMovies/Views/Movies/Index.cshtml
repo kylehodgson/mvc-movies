@@ -8,7 +8,7 @@
 @using (Html.BeginForm("search" , "movies"))
 {
     @Html.Label(Model.Heading)
-    @Html.TextBox("SearchTerm")
+    @Html.TextBoxFor(vm => vm.SearchRequest.SearchTerm)
     @Html.Hidden("NumRows",3)
     <input type="submit" value="Search" />
 }

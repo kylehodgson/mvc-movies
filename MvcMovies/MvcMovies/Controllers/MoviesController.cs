@@ -26,9 +26,10 @@ namespace MvcMovies.Controllers
     }
 
     [HttpPost]
-    public ViewResult Search(SearchRequest searchRequest)
+    public ViewResult Search(MovieSearchViewModel searchViewModel)
     {
-      var movies = _movieCatalogue.SearchMovies(searchRequest.SearchTerm).ToList().Take(searchRequest.NumRows);
+      var searchTerm = searchViewModel.SearchRequest.SearchTerm;
+      var movies = _movieCatalogue.SearchMovies(searchTerm).ToList().Take(searchViewModel.SearchRequest.NumRows);
       var viewModel = new MovieSearchResultViewModel {PageTitle = "Search Results", Movies = movies};
       return View(viewModel);
     }

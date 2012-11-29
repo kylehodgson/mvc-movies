@@ -34,7 +34,8 @@ namespace MvcMovies.Tests.Controllers
       //arrange
       var movieCatalogue = new Mock<MovieCatalogue>();
       string title = "Robocop";
-      var searchRequest = new SearchRequest{ NumRows = 5, SearchTerm = title, StartAt = 0 };
+      var searchRequest = new SearchRequest {NumRows = 5, SearchTerm = title, StartAt = 0};
+      var searchViewModel = new MovieSearchViewModel {SearchRequest = searchRequest};
 
       var movie = new Movie {Title = title};
 
@@ -42,7 +43,7 @@ namespace MvcMovies.Tests.Controllers
       var moviesController = new MoviesController(movieCatalogue.Object);
 
       //act
-      ViewResult result = moviesController.Search(searchRequest);
+      ViewResult result = moviesController.Search(searchViewModel);
 
       var viewModel = (MovieSearchResultViewModel) result.Model;
 
@@ -65,11 +66,12 @@ namespace MvcMovies.Tests.Controllers
 
       movieCatalogue.Setup(it => it.SearchMovies(title)).Returns(movies);
       var moviesController = new MoviesController(movieCatalogue.Object);
-      
-      var searchRequest = new SearchRequest { NumRows = expectedNumberOfRows, SearchTerm = title, StartAt = 0 };
+
+      var searchRequest = new SearchRequest {NumRows = expectedNumberOfRows, SearchTerm = title, StartAt = 0};
+      var searchViewModel = new MovieSearchViewModel {SearchRequest = searchRequest};
 
       //act
-      ViewResult result = moviesController.Search(searchRequest);
+      ViewResult result = moviesController.Search(searchViewModel);
       var viewModel = (MovieSearchResultViewModel)result.Model;
 
       Assert.AreEqual(expectedNumberOfRows, viewModel.Movies.Count());
