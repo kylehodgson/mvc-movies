@@ -28,7 +28,7 @@ namespace MvcMovies.Models
 
     public virtual IEnumerable<Movie> SearchMovie(string title)
     {
-      return Movies.Where(movie => movie.Title == title);
+      return Movies.Where(movie => movie.Title.ToLower().Contains(title.ToLower()));
     }
   }
 }

@@ -33,6 +33,34 @@ namespace MvcMovies.Tests.Models
     }
 
     [TestMethod]
+    public void Title_Search_Should_Recognise_Partial_Matches()
+    {
+      var movieTitle = "The Title 44";
+      var expectedMovie = new Movie { Title = movieTitle };
+      var movieContext = new MoviesContextMock(new List<Movie> { expectedMovie });
+
+
+      var result = movieContext.SearchMovie("Title").ToList();
+
+      Assert.AreEqual(1, result.Count());
+      Assert.AreEqual(expectedMovie, result[0]);
+    }
+
+    [TestMethod]
+    public void Title_Search_Should_Be_Case_Insensitive()
+    {
+      var movieTitle = "The Title 44";
+      var expectedMovie = new Movie { Title = movieTitle };
+      var movieContext = new MoviesContextMock(new List<Movie> { expectedMovie });
+
+
+      var result = movieContext.SearchMovie("tITLE").ToList();
+
+      Assert.AreEqual(1, result.Count());
+      Assert.AreEqual(expectedMovie, result[0]);
+    }
+
+    [TestMethod]
     public void It_Should_Add_Movies()
     {
       var movieToAdd = new Movie {Title = "robocop"};
