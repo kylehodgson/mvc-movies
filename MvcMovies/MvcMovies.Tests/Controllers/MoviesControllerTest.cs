@@ -39,7 +39,7 @@ namespace MvcMovies.Tests.Controllers
 
       var movie = new Movie {Title = title};
 
-      movieCatalogue.Setup(it => it.SearchMovies(title)).Returns(new List<Movie> { movie });
+      movieCatalogue.Setup(it => it.SearchMovies(title)).Returns(new List<Movie> {movie});
       var moviesController = new MoviesController(movieCatalogue.Object);
 
       //act
@@ -72,9 +72,25 @@ namespace MvcMovies.Tests.Controllers
 
       //act
       ViewResult result = moviesController.Search(searchViewModel);
-      var viewModel = (MovieSearchResultViewModel)result.Model;
+      var viewModel = (MovieSearchResultViewModel) result.Model;
 
       Assert.AreEqual(expectedNumberOfRows, viewModel.Movies.Count());
+    }
+
+    [TestMethod]
+    public void Search_Term_Must_Follow_Validation_Rules()
+    {
+      // Arrange
+      var controller = new MoviesController();
+      controller.ModelState.AddModelError("SearchTerm","mock error message");
+      var viewModel = new MovieSearchViewModel{SearchRequest = new SearchRequest{SearchTerm = ""}};
+
+      // Act
+      var result = (MovieSearchResultViewModel)controller.Search(viewModel).Model;
+
+      // Assert
+      Assert.AreEqual("Please Try Again", result.PageTitle);
+      Assert.IsNotNull(result.Movies);
     }
   }
 }
