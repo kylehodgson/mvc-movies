@@ -1,4 +1,4 @@
-﻿namespace MvcMovies.Controllers
+﻿namespace MvcMovies.Models
 {
   public class SearchRequest
   {
