@@ -20,7 +20,7 @@ namespace MvcMovies.Tests.Controllers
       var moviesController = new MoviesController();
 
       //act
-      var result = (ViewResult) moviesController.Index();
+      var result = (PartialViewResult) moviesController.SearchForMovie();
 
       //assert
       var searchViewModel = (MovieSearchViewModel) result.Model;

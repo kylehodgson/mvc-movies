@@ -1,0 +1,16 @@
+﻿@model MvcMovies.Models.ViewModels.MovieSearchViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+@using (Html.BeginForm("search" , "movies"))
+{
+    @Html.Label(Model.Heading)
+    @Html.TextBoxFor(vm => vm.SearchRequest.SearchTerm)
+    <br/>
+    @Html.LabelFor(vm => vm.SearchRequest.NumRows)
+    @Html.EditorFor(vm => vm.SearchRequest.NumRows)
+    <input type="submit" value="Search" />
+}

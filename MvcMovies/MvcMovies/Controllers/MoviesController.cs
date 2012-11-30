@@ -21,10 +21,15 @@ namespace MvcMovies.Controllers
       _movieCatalogue = movie ?? new MovieCatalogue();
     }
 
-    public ActionResult Index()
+    public ViewResult Index()
+    {
+      return View();
+    }
+
+    public ActionResult SearchForMovie()
     {
       var viewModel = new MovieSearchViewModel {PageTitle = "Search Movies", Heading = "Title"};
-      return View(viewModel);
+      return PartialView(viewModel);
     }
 
     [HttpPost]
