@@ -5,16 +5,14 @@ using System.Linq;
 
 namespace MvcMovies.Models
 {
-  public class MoviesContext : DbContext
+  public class MoviesContext : DbContext, IMoviesContext
   {
-//    public DbSet<Movie> Movies { get; set; }
     public List<Movie> Movies =
       Enumerable.Range(1, 10).Select(i => new Movie
                                             {
                                               Title = String.Format("Halloween {0}", i)
                                             }
         ).ToList();
-
 
     public virtual int GetNumberOfMovies()
     {

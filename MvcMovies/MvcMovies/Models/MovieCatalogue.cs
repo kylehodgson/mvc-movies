@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MvcMovies.Repositories;
 
 namespace MvcMovies.Models
 {
-  public class MovieCatalogue
+  public class MovieCatalogue : IMovieCatalogue
   {
     private MovieRepository _movieRepository;
 

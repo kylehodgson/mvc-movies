@@ -5,7 +5,7 @@ using MvcMovies.Models;
 
 namespace MvcMovies.Repositories
 {
-  public class MovieRepository
+  public class MovieRepository : IMovieRepository
   {
     private MoviesContext MovieContext;
 
