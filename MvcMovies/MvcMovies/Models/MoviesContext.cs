@@ -10,7 +10,7 @@ namespace MvcMovies.Models
     public List<Movie> Movies =
       Enumerable.Range(1, 10).Select(i => new Movie
                                             {
-                                              Title = String.Format("Halloween {0}", i)
+                                              Title = String.Format("Bob {0}", i)
                                             }
         ).ToList();
 
@@ -26,7 +26,8 @@ namespace MvcMovies.Models
 
     public virtual IEnumerable<Movie> SearchMovie(string title)
     {
-      return Movies.Where(movie => movie.Title.ToLower().Contains(title.ToLower()));
+      IEnumerable<Movie> searchMovie = Movies.Where(movie => movie.Title.ToLower().Contains(title.ToLower()));
+      return searchMovie;
     }
   }
 }

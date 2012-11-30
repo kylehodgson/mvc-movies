@@ -9,6 +9,8 @@
 {
     @Html.Label(Model.Heading)
     @Html.TextBoxFor(vm => vm.SearchRequest.SearchTerm)
-    @Html.Hidden("NumRows",3)
+    <br/>
+    @Html.LabelFor(vm => vm.SearchRequest.NumRows)
+    @Html.EditorFor(vm => vm.SearchRequest.NumRows)
     <input type="submit" value="Search" />
-}
+}   
