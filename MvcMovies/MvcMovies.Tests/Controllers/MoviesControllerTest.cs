@@ -14,38 +14,22 @@ namespace MvcMovies.Tests.Controllers
   public class MoviesControllerTest
   {
     [TestMethod]
-    public void It_Should_Let_The_User_Enter_A_Search_Term()
-    {
-      //arrange
-      var moviesController = new MoviesController();
-
-      //act
-      var result = (PartialViewResult) moviesController.SearchForMovie();
-
-      //assert
-      var searchViewModel = (MovieSearchViewModel) result.Model;
-      Assert.AreEqual("Search Movies", searchViewModel.PageTitle);
-      Assert.AreEqual("Title", searchViewModel.Heading);
-    }
-
-    [TestMethod]
     public void It_Should_Search_Movies_By_Title()
     {
       //arrange
       var movieCatalogue = new Mock<MovieCatalogue>();
       string title = "Robocop";
-      var searchRequest = new SearchRequest {NumRows = 5, SearchTerm = title, StartAt = 0};
-      var searchViewModel = new MovieSearchViewModel {SearchRequest = searchRequest};
-
+      var searchRequest = new SearchRequestViewModel {NumRows = 5, SearchTerm = title, StartAt = 0};
+      
       var movie = new Movie {Title = title};
 
       movieCatalogue.Setup(it => it.SearchMovies(title)).Returns(new List<Movie> {movie});
       var moviesController = new MoviesController(movieCatalogue.Object);
 
       //act
-      ViewResult result = moviesController.Search(searchViewModel);
+      ViewResult result = moviesController.SearchPage(searchRequest);
 
-      var viewModel = (MovieSearchResultViewModel) result.Model;
+      var viewModel = (SearchResultViewModel) result.Model;
 
       //assert
       Assert.AreEqual(1, viewModel.Movies.Count());
@@ -67,12 +51,11 @@ namespace MvcMovies.Tests.Controllers
       movieCatalogue.Setup(it => it.SearchMovies(title)).Returns(movies);
       var moviesController = new MoviesController(movieCatalogue.Object);
 
-      var searchRequest = new SearchRequest {NumRows = expectedNumberOfRows, SearchTerm = title, StartAt = 0};
-      var searchViewModel = new MovieSearchViewModel {SearchRequest = searchRequest};
+      var searchRequest = new SearchRequestViewModel {NumRows = expectedNumberOfRows, SearchTerm = title, StartAt = 0};
 
       //act
-      ViewResult result = moviesController.Search(searchViewModel);
-      var viewModel = (MovieSearchResultViewModel) result.Model;
+      ViewResult result = moviesController.SearchPage(searchRequest);
+      var viewModel = (SearchResultViewModel) result.Model;
 
       Assert.AreEqual(expectedNumberOfRows, viewModel.Movies.Count());
     }
@@ -83,10 +66,10 @@ namespace MvcMovies.Tests.Controllers
       // Arrange
       var controller = new MoviesController();
       controller.ModelState.AddModelError("SearchTerm","mock error message");
-      var viewModel = new MovieSearchViewModel{SearchRequest = new SearchRequest{SearchTerm = ""}};
+      var searchRequest = new SearchRequestViewModel{SearchTerm = ""};
 
       // Act
-      var result = (MovieSearchResultViewModel)controller.Search(viewModel).Model;
+      var result = (SearchResultViewModel)controller.SearchPage(searchRequest).Model;
 
       // Assert
       Assert.AreEqual("Please Try Again", result.PageTitle);

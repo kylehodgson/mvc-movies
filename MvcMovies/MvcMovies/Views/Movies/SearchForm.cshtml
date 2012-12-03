@@ -1,0 +1,21 @@
+﻿@model MvcMovies.Models.SearchRequestViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+@using (Html.BeginForm("searchpage" , "movies"))
+{
+    @Html.LabelFor(vm => vm.SearchTerm)
+    @Html.TextBoxFor(vm => vm.SearchTerm)
+    @Html.ValidationMessageFor(vm=>vm.SearchTerm)
+    <br/>
+    @Html.LabelFor(vm => vm.NumRows)
+    @Html.EditorFor(vm => vm.NumRows)
+    @Html.ValidationMessageFor(vm => vm.NumRows)
+    <input type="submit" value="Search" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -26,23 +26,22 @@ namespace MvcMovies.Controllers
       return View();
     }
 
-    public ActionResult SearchForMovie()
+    public ActionResult SearchForm()
     {
-      var viewModel = new MovieSearchViewModel {PageTitle = "Search Movies", Heading = "Title"};
-      return PartialView(viewModel);
+      return PartialView();
     }
 
     [HttpPost]
-    public ViewResult Search(MovieSearchViewModel searchViewModel)
+    public ViewResult SearchPage(SearchRequestViewModel searchRequestViewModel)
     {
       if (!ModelState.IsValid)
       {
-        return View(new MovieSearchResultViewModel{PageTitle = "Please Try Again"});
+        return View(new SearchResultViewModel{PageTitle = "Please Try Again"});
       }
 
-      var searchTerm = searchViewModel.SearchRequest.SearchTerm;
-      var movies = _movieCatalogue.SearchMovies(searchTerm).ToList().Take(searchViewModel.SearchRequest.NumRows);
-      var viewModel = new MovieSearchResultViewModel { PageTitle = "Search Results", Movies = movies };
+      var searchTerm = searchRequestViewModel.SearchTerm;
+      var movies = _movieCatalogue.SearchMovies(searchTerm).ToList().Take(searchRequestViewModel.NumRows);
+      var viewModel = new SearchResultViewModel { PageTitle = "Search Results", Movies = movies };
       return View(viewModel);
     }
   }

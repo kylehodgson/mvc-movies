@@ -1,0 +1,14 @@
+﻿@model MvcMovies.Models.ViewModels.SearchResultViewModel
+
+@{
+    ViewBag.Title = "SearchResults";
+}
+
+@{Html.RenderAction("SearchForm");}
+
+<h2>SearchResults</h2>
+
+@foreach (var movie in Model.Movies)
+{
+    @Html.DisplayFor(m => movie.Title)
+}
