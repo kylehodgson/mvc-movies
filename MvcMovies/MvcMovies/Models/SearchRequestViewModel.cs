@@ -7,7 +7,7 @@ namespace MvcMovies.Models
     public int NumRows { get; set; }
 
     [Required]
-    [MinLength(3)]
+    [StringLength(100, ErrorMessage = "{0} must be between {2} and {1} characters long", MinimumLength = 3)]
     public string SearchTerm { get; set; }
 
     public int StartAt{ get; set; }
