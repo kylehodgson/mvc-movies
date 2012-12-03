@@ -7,6 +7,7 @@ using Moq;
 using MvcMovies.Controllers;
 using MvcMovies.Models;
 using MvcMovies.Models.ViewModels;
+using MvcMovies.Repositories;
 
 namespace MvcMovies.Tests.Controllers
 {
@@ -74,6 +75,24 @@ namespace MvcMovies.Tests.Controllers
       // Assert
       Assert.AreEqual("Please Try Again", result.PageTitle);
       Assert.IsNotNull(result.Movies);
+    }
+
+    [TestMethod]
+    public void It_Should_Provide_Details_Page()
+    {
+      
+      var movieRepo = new Mock<MovieRepository>();
+      var movie = new Movie {Id = 1, Title = "Title"};
+      movieRepo.Setup(it => it.GetMovie(movie.Id)).Returns(movie);
+
+      var controller = new MoviesController(repository: movieRepo.Object);
+
+      var model = controller.Details(movie.Id).Model;
+      var resultModel = (Movie)model;
+
+      Assert.IsNotNull(movie);
+      Assert.IsNotNull(resultModel);
+      Assert.AreEqual(movie.Id, resultModel.Id);
     }
   }
 }

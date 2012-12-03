@@ -11,7 +11,7 @@ namespace MvcMovies.Tests.Models
     [TestMethod]
     public void It_Should_Count_Movies()
     {
-      var movieContext = new MoviesContextMock(new List<Movie> { new Movie(), new Movie() });
+      var movieContext = new MoviesContextMock(new List<Movie> {new Movie(), new Movie()});
       const int expectedCount = 2;
 
       var actualCount = movieContext.GetNumberOfMovies();
@@ -36,8 +36,8 @@ namespace MvcMovies.Tests.Models
     public void Title_Search_Should_Recognise_Partial_Matches()
     {
       var movieTitle = "The Title 44";
-      var expectedMovie = new Movie { Title = movieTitle };
-      var movieContext = new MoviesContextMock(new List<Movie> { expectedMovie });
+      var expectedMovie = new Movie {Title = movieTitle};
+      var movieContext = new MoviesContextMock(new List<Movie> {expectedMovie});
 
 
       var result = movieContext.SearchMovie("Title").ToList();
@@ -50,8 +50,8 @@ namespace MvcMovies.Tests.Models
     public void Title_Search_Should_Be_Case_Insensitive()
     {
       var movieTitle = "The Title 44";
-      var expectedMovie = new Movie { Title = movieTitle };
-      var movieContext = new MoviesContextMock(new List<Movie> { expectedMovie });
+      var expectedMovie = new Movie {Title = movieTitle};
+      var movieContext = new MoviesContextMock(new List<Movie> {expectedMovie});
 
 
       var result = movieContext.SearchMovie("tITLE").ToList();
@@ -65,12 +65,23 @@ namespace MvcMovies.Tests.Models
     {
       var movieToAdd = new Movie {Title = "robocop"};
       var movieContextMock = new MoviesContextMock(new List<Movie>());
-            
+
       movieContextMock.AddMovie(movieToAdd);
       int actualCount = movieContextMock.GetNumberOfMovies();
 
       Assert.AreEqual(1, actualCount);
-      Assert.AreEqual("robocop",movieContextMock.Movies.ToList()[0].Title);
+      Assert.AreEqual("robocop", movieContextMock.Movies.ToList()[0].Title);
+    }
+
+    [TestMethod]
+    public void It_Should_Find_Movie_By_Id()
+    {
+      var movie = new Movie {Id = 1, Title = "One"};
+      var movieContextMock = new MoviesContextMock(new List<Movie> {movie});
+
+      var result = movieContextMock.GetMovie(movie.Id);
+
+      Assert.AreEqual(movie, result);
     }
   }
 }

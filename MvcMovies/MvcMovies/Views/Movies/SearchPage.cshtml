@@ -4,11 +4,14 @@
     ViewBag.Title = "SearchResults";
 }
 
-@{Html.RenderAction("SearchForm");}
+@{ Html.RenderAction("SearchForm"); }
 
 <h2>SearchResults</h2>
 
 @foreach (var movie in Model.Movies)
 {
-    @Html.DisplayFor(m => movie.Title)
+    <div>
+        @Html.DisplayFor(m => movie.Title)
+        @Html.ActionLink("View", "Details", new { id = movie.Id})
+    </div>
 }

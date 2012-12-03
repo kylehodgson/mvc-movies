@@ -33,5 +33,10 @@ namespace MvcMovies.Repositories
     {
       MovieContext.AddMovie(movie);
     }
+
+    public virtual Movie GetMovie(int id)
+    {
+      return MovieContext.GetMovie(id);
+    }
   }
 }

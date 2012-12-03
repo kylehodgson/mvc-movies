@@ -62,6 +62,19 @@ namespace MvcMovies.Tests
       // assert
       mockContext.Verify(m => m.AddMovie(testMovie),Times.Once());
     }
+
+    [TestMethod]
+    public void It_Should_Get_Individual_Movies()
+    {
+      var movie = new Movie {Id = 123, Title = "The Best Tiotle Ever"};
+      var mockContext = new Mock<MoviesContext>();
+      mockContext.Setup(it => it.GetMovie(movie.Id)).Returns(movie);
+      var repo = new MovieRepository(mockContext.Object);
+
+      var result = repo.GetMovie(movie.Id);
+
+      Assert.AreEqual(movie, result);
+    }
   }
 
 }
