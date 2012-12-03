@@ -28,7 +28,7 @@ namespace MvcMovies.Controllers
 
     public ActionResult SearchForm()
     {
-      return PartialView();
+      return View("SearchForm", "_PartialWithValidation");
     }
 
     [HttpPost]

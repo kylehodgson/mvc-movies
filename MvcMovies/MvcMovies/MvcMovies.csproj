@@ -261,6 +261,7 @@
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\SearchPage.cshtml" />
     <Content Include="Views\Movies\SearchForm.cshtml" />
+    <Content Include="Views\Shared\_PartialWithValidation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
