@@ -25,7 +25,7 @@ namespace MvcMovies.Controllers
     {
       return View();
     }
-
+    
     public ActionResult SearchForm()
     {
       return PartialView();
