@@ -52,7 +52,7 @@ namespace MvcMovies.Controllers
 
     public ViewResult Details(int id)
     {
-      var movie =  _movieRepository.GetMovie(id);
+      var movie = Movie.Get(_movieRepository, id);
       return View(movie);
     }
   }
