@@ -7,5 +7,17 @@ namespace MvcMovies.Models
   {
     public string Title { get; set; }
     public int Id { get; set;  }
+
+    public bool CheckedOut { get; private set; }
+
+    public void Checkout()
+    {
+      if (CheckedOut)
+      {
+        throw new MovieNotAvailableException();
+      }
+      
+      CheckedOut = true;
+    }
   }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Models\IMovieCatalogue.cs" />
     <Compile Include="Models\IMoviesContext.cs" />
+    <Compile Include="Models\MovieNotAvailableException.cs" />
     <Compile Include="Models\SearchRequestViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
