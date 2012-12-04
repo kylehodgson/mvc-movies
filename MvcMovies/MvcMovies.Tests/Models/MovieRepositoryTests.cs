@@ -52,15 +52,18 @@ namespace MvcMovies.Tests
     public void It_Should_Be_Able_To_Add_Movies()
     {
      // arrange
+      var testMovie = new Movie { Title = movieTitle };
       Mock<MoviesContext> mockContext = new Mock<MoviesContext>();
+      mockContext.Setup(ctx => ctx.AddMovie(testMovie)).Returns(testMovie);
       var repo = new MovieRepository(mockContext.Object);
 
       // act
-      var testMovie = new Movie {Title = movieTitle};
-      repo.AddMovie(testMovie);
+      
+      var result = repo.AddMovie(testMovie);
 
       // assert
       mockContext.Verify(m => m.AddMovie(testMovie),Times.Once());
+      Assert.AreEqual(testMovie, result);
     }
 
     [TestMethod]

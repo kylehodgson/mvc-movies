@@ -19,5 +19,15 @@ namespace MvcMovies.Models
       
       CheckedOut = true;
     }
+
+    public static Movie Get(MovieRepository movieRepository, int id)
+    {
+      return movieRepository.GetMovie(id);
+    }
+
+    public static Movie Create(MovieRepository movieRepository, Movie movie)
+    {
+      return movieRepository.AddMovie(movie);
+    }
   }
 }

@@ -7,6 +7,6 @@ namespace MvcMovies.Repositories
   {
     IEnumerable<Movie> SearchMovies(string movieTitle);
     int Count();
-    void AddMovie(Movie movie);
+    Movie AddMovie(Movie movie);
   }
 }

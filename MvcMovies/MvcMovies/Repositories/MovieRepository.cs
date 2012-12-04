@@ -7,36 +7,36 @@ namespace MvcMovies.Repositories
 {
   public class MovieRepository : IMovieRepository
   {
-    private MoviesContext MovieContext;
+    private MoviesContext _movieContext;
 
     public MovieRepository()
     {
-      MovieContext = new MoviesContext();
+      _movieContext = new MoviesContext();
     }
 
     public MovieRepository(MoviesContext moviesContext = null)
     {
-      MovieContext = moviesContext ?? new MoviesContext();
+      _movieContext = moviesContext ?? new MoviesContext();
     }
 
     public virtual IEnumerable<Movie> SearchMovies(string movieTitle)
     {
-      return MovieContext.SearchMovie(movieTitle);
+      return _movieContext.SearchMovie(movieTitle);
     }
 
     public int Count()
     {
-      return MovieContext.GetNumberOfMovies();
+      return _movieContext.GetNumberOfMovies();
     }
 
-    public void AddMovie(Movie movie)
+    public virtual Movie AddMovie(Movie movie)
     {
-      MovieContext.AddMovie(movie);
+      return _movieContext.AddMovie(movie);
     }
 
     public virtual Movie GetMovie(int id)
     {
-      return MovieContext.GetMovie(id);
+      return _movieContext.GetMovie(id);
     }
 
     public virtual void CreateMovie(Movie newMovie)

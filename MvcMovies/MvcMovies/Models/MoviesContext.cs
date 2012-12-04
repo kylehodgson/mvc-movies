@@ -20,9 +20,10 @@ namespace MvcMovies.Models
       return Movies.Count();
     }
 
-    public virtual void AddMovie(Movie movie)
+    public virtual Movie AddMovie(Movie movie)
     {
       Movies.Add(movie);
+      return movie;
     }
 
     public virtual IEnumerable<Movie> SearchMovie(string title)

@@ -5,7 +5,7 @@ namespace MvcMovies.Models
   public interface IMoviesContext
   {
     int GetNumberOfMovies();
-    void AddMovie(Movie movie);
+    Movie AddMovie(Movie movie);
     IEnumerable<Movie> SearchMovie(string title);
   }
 }
