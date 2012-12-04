@@ -38,10 +38,5 @@ namespace MvcMovies.Repositories
     {
       return _movieContext.GetMovie(id);
     }
-
-    public virtual void CreateMovie(Movie newMovie)
-    {
-      // TODO Test and implement
-    }
   }
 }

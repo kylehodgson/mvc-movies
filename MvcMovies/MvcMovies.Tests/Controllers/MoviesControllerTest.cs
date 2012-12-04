@@ -94,17 +94,5 @@ namespace MvcMovies.Tests.Controllers
       Assert.IsNotNull(resultModel);
       Assert.AreEqual(movie.Id, resultModel.Id);
     }
-
-    [TestMethod]
-    public void It_Should_Create_A_Movie()
-    {
-      var newMovie = new Movie();
-      var movieRepo = new Mock<MovieRepository>();
-      var movieController = new MoviesController(repository: movieRepo.Object);
-
-      movieController.Create(newMovie);
-
-      movieRepo.Verify(repo => repo.CreateMovie(newMovie), Times.Once());
-    }
   }
 }

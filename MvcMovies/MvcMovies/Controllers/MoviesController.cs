@@ -55,10 +55,5 @@ namespace MvcMovies.Controllers
       var movie =  _movieRepository.GetMovie(id);
       return View(movie);
     }
-
-    public void Create(Movie newMovie)
-    {
-      _movieRepository.CreateMovie(newMovie);
-    }
   }
 }
